@@ -304,23 +304,6 @@ const Skills: React.FC = () => {
           </p>
         </div>
 
-        {/* Marquee banner */}
-        <div className="py-6 bg-primary/10 backdrop-blur-sm overflow-hidden mb-16">
-          <div className="flex space-x-8 animate-marquee whitespace-nowrap">
-            {[...topSkills, ...topSkills].map((skill, index) => (
-              <div
-                key={index}
-                className="inline-flex items-center px-6 py-2 rounded-full mx-2 bg-primary/20 text-primary-foreground font-semibold"
-              >
-                {skillIcons[skill] || (
-                  <Settings className="h-4 w-4 text-gray-400" />
-                )}
-                <span style={{ marginLeft: "0.3rem" }}>{skill}</span>
-              </div>
-            ))}
-          </div>
-        </div>
-
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-12">
           {/* Frontend Skills */}
           <div
@@ -359,6 +342,22 @@ const Skills: React.FC = () => {
           </div>
         </div>
       </div>
+{/* Marquee banner */}
+        <div className="py-6 bg-primary/10 backdrop-blur-sm overflow-hidden mb-16">
+          <div className="flex space-x-8 animate-marquee whitespace-nowrap">
+            {[...topSkills, ...topSkills].map((skill, index) => (
+              <div
+                key={index}
+                className="inline-flex items-center px-6 py-2 rounded-full mx-2 bg-primary/20 text-primary-foreground font-semibold"
+              >
+                {skillIcons[skill] || (
+                  <Settings className="h-4 w-4 text-gray-400" />
+                )}
+                <span style={{ marginLeft: "0.3rem" }}>{skill}</span>
+              </div>
+            ))}
+          </div>
+        </div>
     </section>
   );
 };
