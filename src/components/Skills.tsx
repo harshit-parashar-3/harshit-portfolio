@@ -290,7 +290,7 @@ const Skills: React.FC = () => {
       <div className="absolute top-0 left-0 w-full h-24 bg-gradient-to-b from-background to-transparent pointer-events-none"></div>
       <div className="absolute bottom-0 left-0 w-full h-24 bg-gradient-to-t from-background to-transparent pointer-events-none"></div>
 
-      <div className="container px-6 mx-auto">
+      <div className="container px-6 mx-auto mb-16">
         <div className="text-center mb-16 reveal">
           <h2 className="text-3xl md:text-4xl font-bold tracking-tight mb-4">
             <span className="bg-clip-text text-transparent bg-gradient-to-r from-primary to-blue-400">
