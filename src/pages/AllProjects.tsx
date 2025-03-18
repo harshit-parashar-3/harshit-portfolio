@@ -178,6 +178,50 @@ const AllProjects: React.FC = () => {
     setCurrentPage(1);
   }, [searchQuery, selectedTag, projects]);
 
+  useEffect(() => {
+    let result = [...projects];
+
+    // Filter by search query
+    if (searchQuery.trim()) {
+      const query = searchQuery.toLowerCase();
+      result = result.filter(
+        (project) =>
+          project.title.toLowerCase().includes(query) ||
+          project.description.toLowerCase().includes(query) ||
+          project.technologies.some((tech) =>
+            tech.toLowerCase().includes(query)
+          )
+      );
+    }
+
+    // Filter by selected tag
+    if (selectedTag) {
+      result = result.filter((project) =>
+        project.technologies.some(
+          (tech) => tech.toLowerCase() === selectedTag.toLowerCase()
+        )
+      );
+    }
+
+    // Filter by category
+    if (selectedCategory !== "all") {
+      result = result.filter(
+        (project) =>
+          project.category?.toLowerCase() === selectedCategory.toLowerCase()
+      );
+    }
+
+    // Sort projects
+    if (sortBy === "newest") {
+      result.sort((a, b) => (b.date || "").localeCompare(a.date || ""));
+    } else if (sortBy === "oldest") {
+      result.sort((a, b) => (a.date || "").localeCompare(b.date || ""));
+    }
+
+    setFilteredProjects(result);
+    setCurrentPage(1); // Reset pagination to first page
+  }, [searchQuery, selectedTag, selectedCategory, sortBy, projects]);
+
   const allTags = Array.from(
     new Set(projects.flatMap((project) => project.technologies))
   );
@@ -272,8 +316,6 @@ const AllProjects: React.FC = () => {
                 <SelectContent>
                   <SelectItem value="newest">Newest First</SelectItem>
                   <SelectItem value="oldest">Oldest First</SelectItem>
-                  <SelectItem value="name-asc">Name (A-Z)</SelectItem>
-                  <SelectItem value="name-desc">Name (Z-A)</SelectItem>
                 </SelectContent>
               </Select>
             </div>
