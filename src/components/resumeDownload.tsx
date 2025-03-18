@@ -3,10 +3,7 @@ import { ExternalLink } from "lucide-react";
 
 const ResumeDownload = () => {
   const handleDownload = () => {
-    saveAs(
-      "../../public/utils/Harshit Parashar-Resume .pdf",
-      "Harshit_Resume.pdf"
-    );
+    saveAs("/utils/Resume.pdf", "Harshit_Resume.pdf");
   };
 
   return (
