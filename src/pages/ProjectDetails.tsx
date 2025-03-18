@@ -1,8 +1,8 @@
-
-import React, { useEffect, useState } from 'react';
-import { useParams, Link } from 'react-router-dom';
-import Layout from '../components/Layout';
-import { ChevronLeft, ExternalLink, Github } from 'lucide-react';
+import React, { useEffect, useState } from "react";
+import { useParams, Link } from "react-router-dom";
+import Layout from "../components/Layout";
+import { ChevronLeft, ExternalLink, Github } from "lucide-react";
+import { UseScrollTop } from "@/hooks/use-scroll-top";
 
 interface Project {
   id: string;
@@ -23,46 +23,145 @@ const ProjectDetails: React.FC = () => {
   const { id } = useParams<{ id: string }>();
   const [project, setProject] = useState<Project | null>(null);
   const [loading, setLoading] = useState(true);
-
+  UseScrollTop();
   useEffect(() => {
     // Simulate fetching project data
     setTimeout(() => {
-      const projectData: Project = {
-        id: id || "",
-        title: id === "ecommerce-platform" ? "E-Commerce Platform" : 
-               id === "task-management" ? "Task Management App" : 
-               id === "weather-dashboard" ? "Weather Dashboard" : 
-               id === "fitness-tracker" ? "Fitness Tracker" : "Project Name",
-        description: "A comprehensive project description.",
-        longDescription: "This project was developed to solve various challenges in the e-commerce space. It features a fully responsive design, intuitive user interface, and secure payment processing. I was responsible for all aspects of the frontend development, from initial design to final implementation, focusing on creating a seamless shopping experience that drives conversions and enhances user engagement.\n\nThe application uses React for the frontend, with Redux managing global state. The backend is built on Node.js and Express, with MongoDB as the database. Authentication is handled through JWT tokens, ensuring secure user access.",
-        image: "https://images.unsplash.com/photo-1498050108023-c5249f4df085?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1172&q=80",
-        tags: ["React", "Redux", "Node.js", "MongoDB", "TypeScript", "CSS Modules"],
-        githubUrl: "https://github.com",
-        liveUrl: "https://example.com",
-        features: [
-          "User authentication and profile management",
-          "Product catalog with search and filtering",
-          "Shopping cart and checkout process",
-          "Payment processing with Stripe integration",
-          "Order tracking and history",
-          "Admin dashboard for product management"
-        ],
-        technologies: [
-          "React 18",
-          "Redux Toolkit",
-          "TypeScript",
-          "Node.js",
-          "Express",
-          "MongoDB",
-          "Stripe API",
-          "CSS Modules",
-          "Jest & React Testing Library"
-        ],
-        date: "June 2023",
-        category: "Web Application"
+      const projectDataMap: Record<string, Project> = {
+        avcwise: {
+          id: "avcwise",
+          title: "AVCWISE",
+          description:
+            "A managed solution for Local Government Pension Scheme (LGPS) salary sacrifice shared cost AVCs.",
+          longDescription:
+            "AVCWISE facilitates efficient management of AVCs, offering features for contributions management, performance tracking, and reporting. It integrates seamlessly with LGPS systems to ensure accurate data synchronization. I was responsible for developing and maintaining the front-end using React.js, focusing on creating an intuitive user interface that enhances user engagement.",
+          image:
+            "https://static.wixstatic.com/media/1b2a28_3e9a5f9f286f42a9b96d97e8dcf45108~mv2.jpg/v1/fill/w_726,h_522,fp_0.60_0.26,q_85,usm_0.66_1.00_0.01,enc_auto/hero_image.jpg",
+          tags: [
+            "React",
+            "JavaScript",
+            "Frontend Development",
+            "Pension Management",
+          ],
+
+          liveUrl: "https://home.avcwise.co.uk/",
+          features: [
+            "User authentication and profile management",
+            "Contributions management with real-time updates",
+            "Performance tracking and analytics",
+            "Comprehensive reporting tools",
+            "Integration with existing LGPS systems",
+          ],
+          technologies: [
+            "React.js",
+            "JavaScript (ES6)",
+            "HTML5 & CSS3",
+            "RESTful APIs",
+            "Git & GitHub",
+          ],
+          date: "2023",
+          category: "Finance Application",
+        },
+        vivup: {
+          id: "vivup",
+          title: "VIVUP",
+          description:
+            "A UK-leading employee benefits platform providing health and well-being solutions.",
+          longDescription:
+            "VIVUP is a comprehensive benefits platform providing an Employee Assistance Program (EAP) to support employee well-being. I contributed to the front-end development using React.js, crafting user-friendly interfaces and collaborating with UI/UX designers to enhance the employee experience.",
+          image:
+            "https://vivupbenefits.co.uk/hs-fs/hubfs/Solutions%20Roundel/All%20Solutions%20-%20White%20BG%20-%20August@0.5x-1.png?width=1031&height=1027&name=All%20Solutions%20-%20White%20BG%20-%20August@0.5x-1.png",
+          tags: [
+            "React",
+            "JavaScript",
+            "Frontend Development",
+            "Employee Benefits",
+          ],
+
+          liveUrl: "https://vivupbenefits.co.uk/",
+          features: [
+            "Employee benefits catalog with search and filtering",
+            "Personalized dashboards for employees",
+            "Usage tracking and analytics",
+            "Integration with HR systems",
+            "Secure access and data management",
+          ],
+          technologies: [
+            "React.js",
+            "JavaScript (ES6)",
+            "HTML5 & CSS3",
+            "RESTful APIs",
+            "Git & GitHub",
+          ],
+          date: "2022",
+          category: "Employee Benefits Platform",
+        },
+        voicerules: {
+          id: "voicerules",
+          title: "VoiceRules - Global Phone System",
+          description:
+            "A global phone system allowing users to receive calls anywhere at a low cost.",
+          longDescription:
+            "VoiceRules offers a cost-effective solution for global communication with virtual phone numbers, call forwarding, and seamless connectivity. I developed the front-end components using React.js, ensuring scalability and a user-friendly interface.",
+          image:
+            "https://www.voicerules.com/assets/voicerules-cutomer-support-team-2c182da324b1d1d5169a2a649ca24a7866cc867cfa3b8ab8fa11178b8a0a282a.png",
+          tags: [
+            "React",
+            "JavaScript",
+            "Frontend Development",
+            "Telecommunications",
+          ],
+          githubUrl: "https://github.com/harshitparashar/voicerules",
+          liveUrl: "https://www.voicerules.com/",
+          features: [
+            "Virtual phone numbers",
+            "Call forwarding and routing",
+            "Global connectivity",
+            "User-friendly interface for call management",
+            "Scalable architecture to support growth",
+          ],
+          technologies: [
+            "React.js",
+            "JavaScript (ES6)",
+            "HTML5 & CSS3",
+            "RESTful APIs",
+            "Git & GitHub",
+          ],
+          date: "2024",
+          category: "Telecommunications",
+        },
+        invoicean: {
+          id: "invoicean",
+          title: "Invoicean",
+          description:
+            "An advanced invoicing solution for freelancers, small businesses, and companies.",
+          longDescription:
+            "Invoicean is a professional invoicing system designed to simplify billing processes, manage clients, and generate financial reports. I led the UI/UX design and frontend development to create a user-friendly and efficient interface.",
+          image:
+            "https://invoicean.com/static/media/marketing-bg.129b9cfa9e5a40b6393a.png",
+          tags: ["React", "JavaScript", "Frontend Development", "Invoicing"],
+          githubUrl: "https://github.com/harshitparashar/invoicean",
+          liveUrl: "https://invoicean.com/",
+          features: [
+            "Invoice creation and management",
+            "Client database with contact management",
+            "Financial reporting and analytics",
+            "Customizable invoice templates",
+            "Secure data storage and access",
+          ],
+          technologies: [
+            "React.js",
+            "JavaScript (ES6)",
+            "HTML5 & CSS3",
+            "RESTful APIs",
+            "Git & GitHub",
+          ],
+          date: "2024",
+          category: "Finance Application",
+        },
       };
-      
-      setProject(projectData);
+
+      setProject(id && projectDataMap[id] ? projectDataMap[id] : null);
       setLoading(false);
     }, 800);
   }, [id]);
@@ -95,20 +194,20 @@ const ProjectDetails: React.FC = () => {
       <div className="pt-28 pb-20">
         <div className="container px-6 mx-auto">
           {/* Back button */}
-          <Link 
-            to="/#projects" 
+          <Link
+            to="/#projects"
             className="inline-flex items-center text-muted-foreground hover:text-primary transition-colors mb-8"
           >
             <ChevronLeft size={18} className="mr-1" />
             Back to Projects
           </Link>
-          
+
           {/* Hero section */}
           <div className="relative rounded-2xl overflow-hidden h-96 mb-12 reveal">
-            <img 
-              src={project.image} 
-              alt={project.title} 
-              className="object-cover w-full h-full"
+            <img
+              src={project.image}
+              alt={project.title}
+              className="object-cover w-full h-full "
             />
             <div className="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent flex flex-col justify-end p-8">
               <div>
@@ -117,26 +216,35 @@ const ProjectDetails: React.FC = () => {
                     {project.category}
                   </span>
                 )}
-                <h1 className="text-3xl md:text-4xl font-bold text-white mb-2">{project.title}</h1>
+                <h1 className="text-3xl md:text-4xl font-bold text-white mb-2">
+                  {project.title}
+                </h1>
                 {project.date && (
                   <p className="text-white/80 text-sm">{project.date}</p>
                 )}
               </div>
             </div>
           </div>
-          
+
           <div className="grid grid-cols-1 lg:grid-cols-3 gap-12">
             {/* Main content */}
-            <div className="lg:col-span-2 reveal" style={{animationDelay: '0.2s'}}>
+            <div
+              className="lg:col-span-2 reveal"
+              style={{ animationDelay: "0.2s" }}
+            >
               <div className="glass-morphism rounded-xl p-8 mb-8">
                 <h2 className="text-2xl font-bold mb-6">Project Overview</h2>
                 <div className="prose prose-sm dark:prose-invert max-w-none">
-                  {project.longDescription?.split('\n\n').map((paragraph, index) => (
-                    <p key={index} className="mb-4 text-muted-foreground">{paragraph}</p>
-                  ))}
+                  {project.longDescription
+                    ?.split("\n\n")
+                    .map((paragraph, index) => (
+                      <p key={index} className="mb-4 text-muted-foreground">
+                        {paragraph}
+                      </p>
+                    ))}
                 </div>
               </div>
-              
+
               {project.features && (
                 <div className="glass-morphism rounded-xl p-8 mb-8">
                   <h2 className="text-2xl font-bold mb-6">Key Features</h2>
@@ -151,17 +259,20 @@ const ProjectDetails: React.FC = () => {
                 </div>
               )}
             </div>
-            
+
             {/* Sidebar */}
-            <div className="lg:col-span-1 reveal" style={{animationDelay: '0.4s'}}>
+            <div
+              className="lg:col-span-1 reveal"
+              style={{ animationDelay: "0.4s" }}
+            >
               {/* Project links */}
               <div className="glass-morphism rounded-xl p-8 mb-8">
                 <h3 className="text-xl font-bold mb-6">Project Links</h3>
                 <div className="space-y-4">
                   {project.liveUrl && (
-                    <a 
-                      href={project.liveUrl} 
-                      target="_blank" 
+                    <a
+                      href={project.liveUrl}
+                      target="_blank"
                       rel="noopener noreferrer"
                       className="flex items-center justify-between p-4 bg-secondary/50 rounded-lg hover:bg-secondary transition-colors"
                     >
@@ -169,11 +280,11 @@ const ProjectDetails: React.FC = () => {
                       <ExternalLink size={18} />
                     </a>
                   )}
-                  
+
                   {project.githubUrl && (
-                    <a 
-                      href={project.githubUrl} 
-                      target="_blank" 
+                    <a
+                      href={project.githubUrl}
+                      target="_blank"
                       rel="noopener noreferrer"
                       className="flex items-center justify-between p-4 bg-secondary/50 rounded-lg hover:bg-secondary transition-colors"
                     >
@@ -183,15 +294,15 @@ const ProjectDetails: React.FC = () => {
                   )}
                 </div>
               </div>
-              
+
               {/* Technologies */}
               {project.technologies && (
                 <div className="glass-morphism rounded-xl p-8 mb-8">
                   <h3 className="text-xl font-bold mb-6">Technologies Used</h3>
                   <div className="flex flex-wrap gap-2">
                     {project.technologies.map((tech, index) => (
-                      <span 
-                        key={index} 
+                      <span
+                        key={index}
                         className="inline-block py-1 px-3 text-sm font-medium bg-secondary/70 rounded-full"
                       >
                         {tech}
@@ -200,15 +311,15 @@ const ProjectDetails: React.FC = () => {
                   </div>
                 </div>
               )}
-              
+
               {/* Tags */}
               {project.tags && (
                 <div className="glass-morphism rounded-xl p-8">
                   <h3 className="text-xl font-bold mb-6">Tags</h3>
                   <div className="flex flex-wrap gap-2">
                     {project.tags.map((tag, index) => (
-                      <span 
-                        key={index} 
+                      <span
+                        key={index}
                         className="inline-block py-1 px-3 text-sm font-medium bg-primary/10 text-primary rounded-full"
                       >
                         {tag}
