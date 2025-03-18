@@ -130,7 +130,7 @@ const Contact: React.FC = () => {
               {/* Calendly Popup Button */}
               <div className="flex justify-center mt-6">
                 <PopupButton
-                  url="https://calendly.com/your-calendly-link" // Replace with your actual Calendly link
+                  url="https://calendly.com/parasharharshit99/collaboration" // Replace with your actual Calendly link
                   rootElement={document.body}
                   text="Schedule a Meeting"
                   className="inline-flex items-center px-6 py-3 text-white bg-primary hover:bg-primary/90 rounded-lg transition-all duration-300"
