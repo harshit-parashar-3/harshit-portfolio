@@ -67,6 +67,16 @@ const Projects: React.FC = () => {
       featured: true,
     },
     {
+      id: "advisoryai",
+      title: "AdvisoryAI",
+      description:
+        "AI software designed for financial advisers to automate advisory documents, meeting notes, and client fact finds.",
+      image: "../../public/utils/advisory.png",
+      tags: ["NextJs", "JavaScript", "Frontend Development", "Finance"],
+      liveUrl: "https://advisoryai.com/",
+      featured: false,
+    },
+    {
       id: "invoicean",
       title: "Invoicean",
       description:
@@ -77,6 +87,18 @@ const Projects: React.FC = () => {
       githubUrl: "https://github.com/harshitparashar/invoicean",
       liveUrl: "https://invoicean.com/",
       featured: false,
+    },
+    {
+      id: "sanchitHealthcare",
+      title: "Sanchit HealthCare LLP",
+      description:
+        "Leading supplier of certified medical and surgical equipment across India.",
+      image: "../../public/utils/Sanchit-HealthCare-LLP.png",
+      tags: ["Medical Equipment", "Healthcare Solutions"],
+      githubUrl:
+        "https://github.com/harshit-parashar-3/sanchit-healthcare-react",
+      liveUrl: "https://sanchithealthcarellp.com/",
+      featured: true,
     },
   ];
 

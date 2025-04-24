@@ -159,6 +159,71 @@ const ProjectDetails: React.FC = () => {
           date: "2024",
           category: "Finance Application",
         },
+        advisoryai: {
+          id: "advisoryai",
+          title: "AdvisoryAI",
+          description:
+            "AI-powered platform designed to revolutionize financial advising through automation and intelligent insights.",
+          longDescription:
+            "AdvisoryAI is an innovative solution tailored for financial advisers, paraplanners, and firms. It features AI employees like Evie and Emma who assist in generating client documents, summaries, and personalized financial reports in seconds. I contributed to building intuitive user flows, enhancing the frontend experience, and ensuring seamless integration of AI services.",
+          image: "../../public/utils/advisory.png",
+          tags: [
+            "React",
+            "JavaScript",
+            "Frontend Development",
+            "AI Integration",
+            "Fintech",
+          ],
+          githubUrl: "", // Private or not available publicly
+          liveUrl: "https://advisoryai.com/",
+          features: [
+            "AI assistant 'Evie' for financial advisors",
+            "AI assistant 'Emma' for paraplanners",
+            "Automated creation of suitability reports and review notes",
+            "Advanced tone-matching and dialect adaptation",
+            "Client fact find updates using AI",
+            "Data security and compliance support",
+          ],
+          technologies: [
+            "React.js",
+            "JavaScript (ES6)",
+            "Next.js",
+            "Tailwind CSS",
+            "OpenAI GPT APIs",
+            "REST APIs",
+            "Git & GitHub",
+          ],
+          date: "2024",
+          category: "AI-powered Fintech Application",
+        },
+        sanchitHealthcare: {
+          id: "sanchitHealthcare",
+          title: "Sanchit HealthCare LLP",
+          description:
+            "A leading supplier of medical and surgical equipment, providing high-quality solutions to healthcare institutions across India.",
+          longDescription:
+            "Established in 2009, Sanchit HealthCare LLP has emerged as a prominent marketing company specializing in medical and surgical equipment. With a commitment to customer satisfaction, the company offers a range of products including patient monitors, ECG machines, and oxygen concentrators. Their focus on quality is demonstrated through ISO 9001 and CE certifications, ensuring reliable and efficient healthcare solutions.",
+          image: "../../public/utils/Sanchit-HealthCare-LLP.png",
+          tags: ["Medical Equipment", "Healthcare Solutions"],
+          githubUrl:
+            "https://github.com/harshit-parashar-3/sanchit-healthcare-react", // Not applicable
+          liveUrl: "https://sanchit-healthcare.com/",
+          features: [
+            "Supply of diagnostic instruments and rapid test kits",
+            "Provision of critical care and respiratory equipment",
+            "Customized solutions for hospitals and clinics",
+            "Emphasis on high-quality, cost-effective products",
+            "Strong after-sales support and service",
+          ],
+          technologies: [
+            "Medical Device Technology",
+            "Quality Assurance Standards",
+            "Supply Chain Management",
+            "Customer Relationship Management",
+          ],
+          date: "2009",
+          category: "Medical Equipment Supplier",
+        },
       };
 
       setProject(id && projectDataMap[id] ? projectDataMap[id] : null);

@@ -94,7 +94,7 @@ const Contact: React.FC = () => {
                     </svg>
                   </a>
                   <a
-                    href="www.linkedin.com/in/harshit-parashar"
+                    href="https://www.linkedin.com/in/harshit-parashar"
                     target="_blank"
                     rel="noopener noreferrer"
                     className="p-2 bg-primary/10 rounded-lg text-primary hover:bg-primary/20 transition-colors"
