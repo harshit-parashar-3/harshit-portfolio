@@ -28,108 +28,108 @@ const ProjectDetails: React.FC = () => {
     // Simulate fetching project data
     setTimeout(() => {
       const projectDataMap: Record<string, Project> = {
-        avcwise: {
-          id: "avcwise",
-          title: "AVCWISE",
-          description:
-            "A managed solution for Local Government Pension Scheme (LGPS) salary sacrifice shared cost AVCs.",
-          longDescription:
-            "AVCWISE facilitates efficient management of AVCs, offering features for contributions management, performance tracking, and reporting. It integrates seamlessly with LGPS systems to ensure accurate data synchronization. I was responsible for developing and maintaining the front-end using React.js, focusing on creating an intuitive user interface that enhances user engagement.",
-          image:
-            "https://static.wixstatic.com/media/1b2a28_3e9a5f9f286f42a9b96d97e8dcf45108~mv2.jpg/v1/fill/w_726,h_522,fp_0.60_0.26,q_85,usm_0.66_1.00_0.01,enc_auto/hero_image.jpg",
-          tags: [
-            "React",
-            "JavaScript",
-            "Frontend Development",
-            "Pension Management",
-          ],
+        // avcwise: {
+        //   id: "avcwise",
+        //   title: "AVCWISE",
+        //   description:
+        //     "A managed solution for Local Government Pension Scheme (LGPS) salary sacrifice shared cost AVCs.",
+        //   longDescription:
+        //     "AVCWISE facilitates efficient management of AVCs, offering features for contributions management, performance tracking, and reporting. It integrates seamlessly with LGPS systems to ensure accurate data synchronization. I was responsible for developing and maintaining the front-end using React.js, focusing on creating an intuitive user interface that enhances user engagement.",
+        //   image:
+        //     "https://static.wixstatic.com/media/1b2a28_3e9a5f9f286f42a9b96d97e8dcf45108~mv2.jpg/v1/fill/w_726,h_522,fp_0.60_0.26,q_85,usm_0.66_1.00_0.01,enc_auto/hero_image.jpg",
+        //   tags: [
+        //     "React",
+        //     "JavaScript",
+        //     "Frontend Development",
+        //     "Pension Management",
+        //   ],
 
-          liveUrl: "https://home.avcwise.co.uk/",
-          features: [
-            "User authentication and profile management",
-            "Contributions management with real-time updates",
-            "Performance tracking and analytics",
-            "Comprehensive reporting tools",
-            "Integration with existing LGPS systems",
-          ],
-          technologies: [
-            "React.js",
-            "JavaScript (ES6)",
-            "HTML5 & CSS3",
-            "RESTful APIs",
-            "Git & GitHub",
-          ],
-          date: "2023",
-          category: "Finance Application",
-        },
-        vivup: {
-          id: "vivup",
-          title: "VIVUP",
-          description:
-            "A UK-leading employee benefits platform providing health and well-being solutions.",
-          longDescription:
-            "VIVUP is a comprehensive benefits platform providing an Employee Assistance Program (EAP) to support employee well-being. I contributed to the front-end development using React.js, crafting user-friendly interfaces and collaborating with UI/UX designers to enhance the employee experience.",
-          image:
-            "https://vivupbenefits.co.uk/hs-fs/hubfs/Solutions%20Roundel/All%20Solutions%20-%20White%20BG%20-%20August@0.5x-1.png?width=1031&height=1027&name=All%20Solutions%20-%20White%20BG%20-%20August@0.5x-1.png",
-          tags: [
-            "React",
-            "JavaScript",
-            "Frontend Development",
-            "Employee Benefits",
-          ],
+        //   liveUrl: "https://home.avcwise.co.uk/",
+        //   features: [
+        //     "User authentication and profile management",
+        //     "Contributions management with real-time updates",
+        //     "Performance tracking and analytics",
+        //     "Comprehensive reporting tools",
+        //     "Integration with existing LGPS systems",
+        //   ],
+        //   technologies: [
+        //     "React.js",
+        //     "JavaScript (ES6)",
+        //     "HTML5 & CSS3",
+        //     "RESTful APIs",
+        //     "Git & GitHub",
+        //   ],
+        //   date: "2023",
+        //   category: "Finance Application",
+        // },
+        // vivup: {
+        //   id: "vivup",
+        //   title: "VIVUP",
+        //   description:
+        //     "A UK-leading employee benefits platform providing health and well-being solutions.",
+        //   longDescription:
+        //     "VIVUP is a comprehensive benefits platform providing an Employee Assistance Program (EAP) to support employee well-being. I contributed to the front-end development using React.js, crafting user-friendly interfaces and collaborating with UI/UX designers to enhance the employee experience.",
+        //   image:
+        //     "https://vivupbenefits.co.uk/hs-fs/hubfs/Solutions%20Roundel/All%20Solutions%20-%20White%20BG%20-%20August@0.5x-1.png?width=1031&height=1027&name=All%20Solutions%20-%20White%20BG%20-%20August@0.5x-1.png",
+        //   tags: [
+        //     "React",
+        //     "JavaScript",
+        //     "Frontend Development",
+        //     "Employee Benefits",
+        //   ],
 
-          liveUrl: "https://vivupbenefits.co.uk/",
-          features: [
-            "Employee benefits catalog with search and filtering",
-            "Personalized dashboards for employees",
-            "Usage tracking and analytics",
-            "Integration with HR systems",
-            "Secure access and data management",
-          ],
-          technologies: [
-            "React.js",
-            "JavaScript (ES6)",
-            "HTML5 & CSS3",
-            "RESTful APIs",
-            "Git & GitHub",
-          ],
-          date: "2022",
-          category: "Employee Benefits Platform",
-        },
-        voicerules: {
-          id: "voicerules",
-          title: "VoiceRules - Global Phone System",
-          description:
-            "A global phone system allowing users to receive calls anywhere at a low cost.",
-          longDescription:
-            "VoiceRules offers a cost-effective solution for global communication with virtual phone numbers, call forwarding, and seamless connectivity. I developed the front-end components using React.js, ensuring scalability and a user-friendly interface.",
-          image:
-            "https://www.voicerules.com/assets/voicerules-cutomer-support-team-2c182da324b1d1d5169a2a649ca24a7866cc867cfa3b8ab8fa11178b8a0a282a.png",
-          tags: [
-            "React",
-            "JavaScript",
-            "Frontend Development",
-            "Telecommunications",
-          ],
-          githubUrl: "https://github.com/harshitparashar/voicerules",
-          liveUrl: "https://www.voicerules.com/",
-          features: [
-            "Virtual phone numbers",
-            "Call forwarding and routing",
-            "Global connectivity",
-            "User-friendly interface for call management",
-            "Scalable architecture to support growth",
-          ],
-          technologies: [
-            "React.js",
-            "JavaScript (ES6)",
-            "HTML5 & CSS3",
-            "RESTful APIs",
-            "Git & GitHub",
-          ],
-          date: "2024",
-          category: "Telecommunications",
-        },
+        //   liveUrl: "https://vivupbenefits.co.uk/",
+        //   features: [
+        //     "Employee benefits catalog with search and filtering",
+        //     "Personalized dashboards for employees",
+        //     "Usage tracking and analytics",
+        //     "Integration with HR systems",
+        //     "Secure access and data management",
+        //   ],
+        //   technologies: [
+        //     "React.js",
+        //     "JavaScript (ES6)",
+        //     "HTML5 & CSS3",
+        //     "RESTful APIs",
+        //     "Git & GitHub",
+        //   ],
+        //   date: "2022",
+        //   category: "Employee Benefits Platform",
+        // },
+        // voicerules: {
+        //   id: "voicerules",
+        //   title: "VoiceRules - Global Phone System",
+        //   description:
+        //     "A global phone system allowing users to receive calls anywhere at a low cost.",
+        //   longDescription:
+        //     "VoiceRules offers a cost-effective solution for global communication with virtual phone numbers, call forwarding, and seamless connectivity. I developed the front-end components using React.js, ensuring scalability and a user-friendly interface.",
+        //   image:
+        //     "https://www.voicerules.com/assets/voicerules-cutomer-support-team-2c182da324b1d1d5169a2a649ca24a7866cc867cfa3b8ab8fa11178b8a0a282a.png",
+        //   tags: [
+        //     "React",
+        //     "JavaScript",
+        //     "Frontend Development",
+        //     "Telecommunications",
+        //   ],
+        //   githubUrl: "https://github.com/harshitparashar/voicerules",
+        //   liveUrl: "https://www.voicerules.com/",
+        //   features: [
+        //     "Virtual phone numbers",
+        //     "Call forwarding and routing",
+        //     "Global connectivity",
+        //     "User-friendly interface for call management",
+        //     "Scalable architecture to support growth",
+        //   ],
+        //   technologies: [
+        //     "React.js",
+        //     "JavaScript (ES6)",
+        //     "HTML5 & CSS3",
+        //     "RESTful APIs",
+        //     "Git & GitHub",
+        //   ],
+        //   date: "2024",
+        //   category: "Telecommunications",
+        // },
         invoicean: {
           id: "invoicean",
           title: "Invoicean",
@@ -159,43 +159,43 @@ const ProjectDetails: React.FC = () => {
           date: "2024",
           category: "Finance Application",
         },
-        advisoryai: {
-          id: "advisoryai",
-          title: "AdvisoryAI",
-          description:
-            "AI-powered platform designed to revolutionize financial advising through automation and intelligent insights.",
-          longDescription:
-            "AdvisoryAI is an innovative solution tailored for financial advisers, paraplanners, and firms. It features AI employees like Evie and Emma who assist in generating client documents, summaries, and personalized financial reports in seconds. I contributed to building intuitive user flows, enhancing the frontend experience, and ensuring seamless integration of AI services.",
-          image: "https://res.cloudinary.com/dqciqsoy0/image/upload/v1745559169/lupkux745v00tzfjn3ep.png",
-          tags: [
-            "React",
-            "JavaScript",
-            "Frontend Development",
-            "AI Integration",
-            "Fintech",
-          ],
-          githubUrl: "", // Private or not available publicly
-          liveUrl: "https://advisoryai.com/",
-          features: [
-            "AI assistant 'Evie' for financial advisors",
-            "AI assistant 'Emma' for paraplanners",
-            "Automated creation of suitability reports and review notes",
-            "Advanced tone-matching and dialect adaptation",
-            "Client fact find updates using AI",
-            "Data security and compliance support",
-          ],
-          technologies: [
-            "React.js",
-            "JavaScript (ES6)",
-            "Next.js",
-            "Tailwind CSS",
-            "OpenAI GPT APIs",
-            "REST APIs",
-            "Git & GitHub",
-          ],
-          date: "2024",
-          category: "AI-powered Fintech Application",
-        },
+        // advisoryai: {
+        //   id: "advisoryai",
+        //   title: "AdvisoryAI",
+        //   description:
+        //     "AI-powered platform designed to revolutionize financial advising through automation and intelligent insights.",
+        //   longDescription:
+        //     "AdvisoryAI is an innovative solution tailored for financial advisers, paraplanners, and firms. It features AI employees like Evie and Emma who assist in generating client documents, summaries, and personalized financial reports in seconds. I contributed to building intuitive user flows, enhancing the frontend experience, and ensuring seamless integration of AI services.",
+        //   image: "https://res.cloudinary.com/dqciqsoy0/image/upload/v1745559169/lupkux745v00tzfjn3ep.png",
+        //   tags: [
+        //     "React",
+        //     "JavaScript",
+        //     "Frontend Development",
+        //     "AI Integration",
+        //     "Fintech",
+        //   ],
+        //   githubUrl: "", // Private or not available publicly
+        //   liveUrl: "https://advisoryai.com/",
+        //   features: [
+        //     "AI assistant 'Evie' for financial advisors",
+        //     "AI assistant 'Emma' for paraplanners",
+        //     "Automated creation of suitability reports and review notes",
+        //     "Advanced tone-matching and dialect adaptation",
+        //     "Client fact find updates using AI",
+        //     "Data security and compliance support",
+        //   ],
+        //   technologies: [
+        //     "React.js",
+        //     "JavaScript (ES6)",
+        //     "Next.js",
+        //     "Tailwind CSS",
+        //     "OpenAI GPT APIs",
+        //     "REST APIs",
+        //     "Git & GitHub",
+        //   ],
+        //   date: "2024",
+        //   category: "AI-powered Fintech Application",
+        // },
         sanchitHealthcare: {
           id: "sanchitHealthcare",
           title: "Sanchit HealthCare LLP",
