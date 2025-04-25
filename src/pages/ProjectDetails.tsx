@@ -166,7 +166,7 @@ const ProjectDetails: React.FC = () => {
             "AI-powered platform designed to revolutionize financial advising through automation and intelligent insights.",
           longDescription:
             "AdvisoryAI is an innovative solution tailored for financial advisers, paraplanners, and firms. It features AI employees like Evie and Emma who assist in generating client documents, summaries, and personalized financial reports in seconds. I contributed to building intuitive user flows, enhancing the frontend experience, and ensuring seamless integration of AI services.",
-          image: "../../public/utils/advisory.png",
+          image: "https://res.cloudinary.com/dqciqsoy0/image/upload/v1745559169/lupkux745v00tzfjn3ep.png",
           tags: [
             "React",
             "JavaScript",
@@ -203,7 +203,7 @@ const ProjectDetails: React.FC = () => {
             "A leading supplier of medical and surgical equipment, providing high-quality solutions to healthcare institutions across India.",
           longDescription:
             "Established in 2009, Sanchit HealthCare LLP has emerged as a prominent marketing company specializing in medical and surgical equipment. With a commitment to customer satisfaction, the company offers a range of products including patient monitors, ECG machines, and oxygen concentrators. Their focus on quality is demonstrated through ISO 9001 and CE certifications, ensuring reliable and efficient healthcare solutions.",
-          image: "../../public/utils/Sanchit-HealthCare-LLP.png",
+          image: "https://res.cloudinary.com/dqciqsoy0/image/upload/v1745559185/uvkeczgw2uebrhqonpyj.png",
           tags: ["Medical Equipment", "Healthcare Solutions"],
           githubUrl:
             "https://github.com/harshit-parashar-3/sanchit-healthcare-react", // Not applicable
