@@ -207,7 +207,7 @@ const ProjectDetails: React.FC = () => {
           tags: ["Medical Equipment", "Healthcare Solutions"],
           githubUrl:
             "https://github.com/harshit-parashar-3/sanchit-healthcare-react", // Not applicable
-          liveUrl: "https://sanchit-healthcare.com/",
+          liveUrl: "https://sanchithealthcarellp.com/",
           features: [
             "Supply of diagnostic instruments and rapid test kits",
             "Provision of critical care and respiratory equipment",
