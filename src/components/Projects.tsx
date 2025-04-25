@@ -15,67 +15,67 @@ interface Project {
 
 const Projects: React.FC = () => {
   const projects: Project[] = [
-    {
-      id: "avcwise",
-      title: "AVCWISE",
-      description:
-        "A managed solution for Local Government Pension Scheme (LGPS) salary sacrifice shared cost AVCs.",
-      image:
-        "https://static.wixstatic.com/media/1b2a28_3e9a5f9f286f42a9b96d97e8dcf45108~mv2.jpg/v1/fill/w_726,h_522,fp_0.60_0.26,q_85,usm_0.66_1.00_0.01,enc_auto/hero_image.jpg",
-      tags: [
-        "React",
-        "JavaScript",
-        "Frontend Development",
-        "Pension Management",
-      ],
+    // {
+    //   id: "avcwise",
+    //   title: "AVCWISE",
+    //   description:
+    //     "A managed solution for Local Government Pension Scheme (LGPS) salary sacrifice shared cost AVCs.",
+    //   image:
+    //     "https://static.wixstatic.com/media/1b2a28_3e9a5f9f286f42a9b96d97e8dcf45108~mv2.jpg/v1/fill/w_726,h_522,fp_0.60_0.26,q_85,usm_0.66_1.00_0.01,enc_auto/hero_image.jpg",
+    //   tags: [
+    //     "React",
+    //     "JavaScript",
+    //     "Frontend Development",
+    //     "Pension Management",
+    //   ],
 
-      liveUrl: "https://home.avcwise.co.uk/",
-      featured: true,
-    },
-    {
-      id: "vivup",
-      title: "VIVUP",
-      description:
-        "A UK-leading employee benefits platform providing health and well-being solutions.",
-      image:
-        "https://vivupbenefits.co.uk/hs-fs/hubfs/Solutions%20Roundel/All%20Solutions%20-%20White%20BG%20-%20August@0.5x-1.png?width=1031&height=1027&name=All%20Solutions%20-%20White%20BG%20-%20August@0.5x-1.png",
-      tags: [
-        "React",
-        "JavaScript",
-        "Frontend Development",
-        "Employee Benefits",
-      ],
+    //   liveUrl: "https://home.avcwise.co.uk/",
+    //   featured: true,
+    // },
+    // {
+    //   id: "vivup",
+    //   title: "VIVUP",
+    //   description:
+    //     "A UK-leading employee benefits platform providing health and well-being solutions.",
+    //   image:
+    //     "https://vivupbenefits.co.uk/hs-fs/hubfs/Solutions%20Roundel/All%20Solutions%20-%20White%20BG%20-%20August@0.5x-1.png?width=1031&height=1027&name=All%20Solutions%20-%20White%20BG%20-%20August@0.5x-1.png",
+    //   tags: [
+    //     "React",
+    //     "JavaScript",
+    //     "Frontend Development",
+    //     "Employee Benefits",
+    //   ],
 
-      liveUrl: "https://vivupbenefits.co.uk/",
-      featured: true,
-    },
-    {
-      id: "voicerules",
-      title: "VoiceRules - Global Phone System",
-      description:
-        "A global phone system allowing users to receive calls anywhere at a low cost.",
-      image:
-        "https://www.voicerules.com/assets/voicerules-cutomer-support-team-2c182da324b1d1d5169a2a649ca24a7866cc867cfa3b8ab8fa11178b8a0a282a.png",
-      tags: [
-        "React",
-        "JavaScript",
-        "Frontend Development",
-        "Telecommunications",
-      ],
+    //   liveUrl: "https://vivupbenefits.co.uk/",
+    //   featured: true,
+    // },
+    // {
+    //   id: "voicerules",
+    //   title: "VoiceRules - Global Phone System",
+    //   description:
+    //     "A global phone system allowing users to receive calls anywhere at a low cost.",
+    //   image:
+    //     "https://www.voicerules.com/assets/voicerules-cutomer-support-team-2c182da324b1d1d5169a2a649ca24a7866cc867cfa3b8ab8fa11178b8a0a282a.png",
+    //   tags: [
+    //     "React",
+    //     "JavaScript",
+    //     "Frontend Development",
+    //     "Telecommunications",
+    //   ],
 
-      liveUrl: "https://www.voicerules.com/",
-      featured: true,
-    },
-    {
-      id: "advisoryai",
-      title: "AdvisoryAI",
-      description:
-        "AI software designed for financial advisers to automate advisory documents, meeting notes, and client fact finds.",
-      image: "https://res.cloudinary.com/dqciqsoy0/image/upload/v1745559169/lupkux745v00tzfjn3ep.png",
-      tags: ["NextJs", "JavaScript", "Frontend Development", "Finance"],
-      liveUrl: "https://advisoryai.com/",
-      featured: false,
-    },
+    //   liveUrl: "https://www.voicerules.com/",
+    //   featured: true,
+    // },
+    // {
+    //   id: "advisoryai",
+    //   title: "AdvisoryAI",
+    //   description:
+    //     "AI software designed for financial advisers to automate advisory documents, meeting notes, and client fact finds.",
+    //   image: "https://res.cloudinary.com/dqciqsoy0/image/upload/v1745559169/lupkux745v00tzfjn3ep.png",
+    //   tags: ["NextJs", "JavaScript", "Frontend Development", "Finance"],
+    //   liveUrl: "https://advisoryai.com/",
+    //   featured: false,
+    // },
     {
       id: "invoicean",
       title: "Invoicean",
