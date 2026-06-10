@@ -1,129 +1,180 @@
-import React, { useState, useEffect } from "react";
-import { Link } from "react-router-dom";
-import { Menu, X, Moon, Sun } from "lucide-react";
+import React, { useEffect, useRef, useState } from "react";
+import { Download, Menu, X } from "lucide-react";
+import Logo from "./Logo";
+
+const NAV_ITEMS = [
+  { label: "About", href: "#about" },
+  { label: "Services", href: "#services" },
+  { label: "Work", href: "#projects" },
+  { label: "Experience", href: "#experience" },
+  { label: "Skills", href: "#skills" },
+  { label: "Contact", href: "#contact" },
+];
 
 const Navbar: React.FC = () => {
-  const [isOpen, setIsOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
-  const [isDarkMode, setIsDarkMode] = useState(() => {
-    if (typeof window !== "undefined") {
-      return document.documentElement.classList.contains("dark");
-    }
-    return false;
-  });
+  const [hidden, setHidden] = useState(false);
+  const [active, setActive] = useState("");
+  const [mobileOpen, setMobileOpen] = useState(false);
+  const progressRef = useRef<HTMLDivElement>(null);
 
+  // Scroll behaviour: glass background, hide-on-scroll-down, progress bar
   useEffect(() => {
-    const handleScroll = () => {
-      if (window.scrollY > 20) {
-        setScrolled(true);
-      } else {
-        setScrolled(false);
+    let lastY = window.scrollY;
+    let raf = 0;
+
+    const update = () => {
+      const y = window.scrollY;
+      setScrolled(y > 24);
+      setHidden(y > 160 && y > lastY && !mobileOpen);
+      lastY = y;
+
+      if (progressRef.current) {
+        const max =
+          document.documentElement.scrollHeight - window.innerHeight;
+        const pct = max > 0 ? (y / max) * 100 : 0;
+        progressRef.current.style.width = `${pct}%`;
       }
     };
 
-    window.addEventListener("scroll", handleScroll);
-    return () => window.removeEventListener("scroll", handleScroll);
+    const onScroll = () => {
+      cancelAnimationFrame(raf);
+      raf = requestAnimationFrame(update);
+    };
+
+    update();
+    window.addEventListener("scroll", onScroll, { passive: true });
+    return () => {
+      window.removeEventListener("scroll", onScroll);
+      cancelAnimationFrame(raf);
+    };
+  }, [mobileOpen]);
+
+  // Section tracking (scrollspy)
+  useEffect(() => {
+    const sections = NAV_ITEMS.map((i) =>
+      document.querySelector(i.href),
+    ).filter(Boolean) as Element[];
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) setActive(`#${entry.target.id}`);
+        });
+      },
+      // A narrow horizontal band around the upper-middle of the viewport:
+      // whichever section crosses it becomes "active".
+      { rootMargin: "-30% 0px -60% 0px", threshold: 0 },
+    );
+
+    sections.forEach((s) => observer.observe(s));
+
+    // Reset to top state when scrolled above the first section
+    const onTop = () => {
+      if (window.scrollY < 200) setActive("");
+    };
+    window.addEventListener("scroll", onTop, { passive: true });
+
+    return () => {
+      observer.disconnect();
+      window.removeEventListener("scroll", onTop);
+    };
   }, []);
 
-  const toggleMenu = () => setIsOpen(!isOpen);
-
-  const toggleTheme = () => {
-    if (isDarkMode) {
-      document.documentElement.classList.remove("dark");
-      setIsDarkMode(false);
-    } else {
-      document.documentElement.classList.add("dark");
-      setIsDarkMode(true);
-    }
-  };
-
-  const navLinks = [
-    { name: "Home", path: "/" },
-    { name: "About", path: "/#about" },
-    { name: "Skills", path: "/#skills" },
-    { name: "Projects", path: "/#projects" },
-    { name: "Contact", path: "/#contact" },
-  ];
-
   return (
-    <nav
-      className={`fixed w-full z-50 transition-all duration-300 ${
-        scrolled
-          ? "bg-white/80 dark:bg-gray-900/80 backdrop-blur-md py-2 shadow-sm"
-          : "bg-transparent py-6"
+    <header
+      className={`anim-nav-drop fixed inset-x-0 top-0 z-50 transition-[transform,background-color,border-color] duration-500 ${
+        hidden ? "-translate-y-full" : "translate-y-0"
+      } ${
+        scrolled || mobileOpen
+          ? "border-b border-white/[0.06] bg-background/70 backdrop-blur-xl"
+          : "border-b border-transparent bg-transparent"
       }`}
     >
-      <div className="container mx-auto px-6 flex items-center justify-between">
-        <Link
-          to="/"
-          className="text-xl font-bold tracking-tighter text-primary hover:opacity-80 transition-opacity"
-        >
-          <span className="sr-only">Portfolio Home</span>
-          <span className="font-light">Harshit</span>
-          <span>Parashar</span>
-        </Link>
+      {/* Reading progress bar */}
+      <div
+        ref={progressRef}
+        className="absolute left-0 top-0 h-[2px] w-0 bg-gradient-to-r from-indigo-400 via-fuchsia-400 to-cyan-400"
+        aria-hidden="true"
+      />
 
-        {/* Desktop menu */}
-        <div className="hidden md:flex items-center space-x-10">
-          {navLinks.map((link) => (
-            <a
-              key={link.name}
-              href={link.path}
-              className="text-sm tracking-wide font-medium hover:text-primary transition-colors"
-            >
-              {link.name}
-            </a>
+      <nav className="container mx-auto flex items-center justify-between px-6 py-4">
+        <a href="#home" aria-label="Back to top">
+          <Logo size={34} />
+        </a>
+
+        <ul className="hidden items-center gap-8 lg:flex">
+          {NAV_ITEMS.map((item) => (
+            <li key={item.href}>
+              <a
+                href={item.href}
+                className={`nav-link ${active === item.href ? "active" : ""}`}
+              >
+                {item.label}
+              </a>
+            </li>
           ))}
-          <button
-            onClick={toggleTheme}
-            className="p-2 rounded-full hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors"
-            aria-label="Toggle dark mode"
+        </ul>
+
+        <div className="hidden items-center gap-3 lg:flex">
+          <a
+            href="/utils/Resume.pdf"
+            download="Harshit_Parashar_Resume.pdf"
+            className="btn-ghost !px-5 !py-2.5 text-xs"
           >
-            {isDarkMode ? <Sun size={18} /> : <Moon size={18} />}
-          </button>
+            <Download size={14} />
+            Resume
+          </a>
         </div>
 
-        {/* Mobile menu button */}
-        <div className="flex items-center md:hidden">
-          <button
-            onClick={toggleTheme}
-            className="p-2 mr-2 rounded-full hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors"
-            aria-label="Toggle dark mode"
-          >
-            {isDarkMode ? <Sun size={18} /> : <Moon size={18} />}
-          </button>
-          <button
-            onClick={toggleMenu}
-            className="p-2 rounded-full hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors"
-            aria-label="Open menu"
-          >
-            {isOpen ? <X size={20} /> : <Menu size={20} />}
-          </button>
-        </div>
-      </div>
+        <button
+          className="text-foreground lg:hidden"
+          onClick={() => setMobileOpen((v) => !v)}
+          aria-label={mobileOpen ? "Close menu" : "Open menu"}
+          aria-expanded={mobileOpen}
+        >
+          {mobileOpen ? <X size={24} /> : <Menu size={24} />}
+        </button>
+      </nav>
 
       {/* Mobile menu */}
       <div
-        className={`absolute top-full left-0 right-0 bg-white dark:bg-gray-900 shadow-lg glass-morphism transform transition-all duration-300 ease-in-out ${
-          isOpen
-            ? "translate-y-0 opacity-100"
-            : "translate-y-[-10px] opacity-0 pointer-events-none"
+        className={`overflow-hidden bg-background/95 backdrop-blur-xl transition-all duration-500 lg:hidden ${
+          mobileOpen
+            ? "max-h-[30rem] border-b border-white/[0.06] opacity-100"
+            : "max-h-0 opacity-0"
         }`}
       >
-        <div className="container mx-auto py-6 px-6 flex flex-col space-y-6">
-          {navLinks.map((link) => (
-            <a
-              key={link.name}
-              href={link.path}
-              className="text-sm tracking-wide font-medium hover:text-primary transition-colors"
-              onClick={toggleMenu}
-            >
-              {link.name}
-            </a>
+        <ul className="flex flex-col gap-1 px-6 py-4">
+          {NAV_ITEMS.map((item) => (
+            <li key={item.href}>
+              <a
+                href={item.href}
+                onClick={() => setMobileOpen(false)}
+                className={`block rounded-lg px-4 py-3 font-display text-base font-medium transition-colors hover:bg-white/5 hover:text-foreground ${
+                  active === item.href
+                    ? "text-foreground"
+                    : "text-muted-foreground"
+                }`}
+              >
+                {item.label}
+              </a>
+            </li>
           ))}
-        </div>
+          <li className="mt-2 px-4 pb-2">
+            <a
+              href="/utils/Resume.pdf"
+              download="Harshit_Parashar_Resume.pdf"
+              className="btn-primary w-full !py-3 text-sm"
+              onClick={() => setMobileOpen(false)}
+            >
+              <Download size={14} />
+              Download Resume
+            </a>
+          </li>
+        </ul>
       </div>
-    </nav>
+    </header>
   );
 };
 

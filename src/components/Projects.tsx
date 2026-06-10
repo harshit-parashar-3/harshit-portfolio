@@ -1,210 +1,136 @@
-import React from "react";
+import React, { useState } from "react";
 import { Link } from "react-router-dom";
-import { ExternalLink, Github, ArrowRight } from "lucide-react";
+import { ArrowUpRight } from "lucide-react";
+import { useReveal, useTilt } from "@/lib/animations";
+import { PROJECTS, type Project } from "@/data/projects";
 
-interface Project {
-  id: string;
-  title: string;
-  description: string;
-  image: string;
-  tags: string[];
-  githubUrl?: string;
-  liveUrl?: string;
-  featured: boolean;
-}
+type Filter = "All" | "Product Work" | "Freelance";
+
+const FILTERS: Filter[] = ["All", "Product Work", "Freelance"];
+
+const ProjectCard: React.FC<{ project: Project; index: number }> = ({
+  project,
+  index,
+}) => (
+  <Link
+    to={`/project/${project.slug}`}
+    className="block focus:outline-none focus-visible:ring-2 focus-visible:ring-primary/60 rounded-2xl"
+    aria-label={`View case study: ${project.title}`}
+  >
+    <article
+      className="glass-card project-card spot-card tilt-card group flex h-full flex-col overflow-hidden"
+      data-reveal
+      data-reveal-delay={(index % 3) * 0.12}
+    >
+      {/* Cover */}
+      <div
+        className={`shine relative h-44 overflow-hidden bg-gradient-to-br ${project.gradient}`}
+      >
+        {project.image ? (
+          <img
+            src={project.image}
+            alt={`${project.title} preview`}
+            loading="lazy"
+            className="h-full w-full object-cover object-top opacity-90 transition-transform duration-700 ease-out group-hover:scale-105"
+          />
+        ) : (
+          <span className="absolute inset-0 flex items-center justify-center font-display text-7xl font-bold text-white/[0.08] transition-transform duration-700 ease-out group-hover:scale-110">
+            {project.initials}
+          </span>
+        )}
+        <span className="absolute left-4 top-4 rounded-full border border-white/10 bg-background/60 px-3 py-1 font-mono text-[10px] uppercase tracking-widest text-muted-foreground backdrop-blur-sm">
+          {project.category}
+        </span>
+      </div>
+
+      {/* Body */}
+      <div className="flex flex-1 flex-col p-6">
+        <div className="mb-1 flex items-start justify-between gap-3">
+          <h3 className="font-display text-xl font-semibold">
+            {project.title}
+          </h3>
+          <ArrowUpRight
+            size={18}
+            className="mt-1 shrink-0 text-muted-foreground transition-all duration-300 group-hover:-translate-y-0.5 group-hover:translate-x-0.5 group-hover:text-primary"
+          />
+        </div>
+        <p className="mb-3 font-mono text-xs uppercase tracking-widest text-primary/80">
+          {project.tagline}
+        </p>
+        <p className="mb-5 flex-1 text-sm leading-relaxed text-muted-foreground">
+          {project.description}
+        </p>
+        <ul className="flex flex-wrap gap-2">
+          {project.tech.slice(0, 4).map((t) => (
+            <li
+              key={t}
+              className="rounded-full border border-white/10 bg-white/[0.04] px-3 py-1 font-mono text-[11px] text-muted-foreground"
+            >
+              {t}
+            </li>
+          ))}
+        </ul>
+        <span className="mt-5 inline-flex items-center gap-1.5 font-mono text-xs uppercase tracking-widest text-primary opacity-0 transition-opacity duration-300 group-hover:opacity-100">
+          View case study
+          <ArrowUpRight size={13} />
+        </span>
+      </div>
+    </article>
+  </Link>
+);
 
 const Projects: React.FC = () => {
-  const projects: Project[] = [
-    // {
-    //   id: "avcwise",
-    //   title: "AVCWISE",
-    //   description:
-    //     "A managed solution for Local Government Pension Scheme (LGPS) salary sacrifice shared cost AVCs.",
-    //   image:
-    //     "https://static.wixstatic.com/media/1b2a28_3e9a5f9f286f42a9b96d97e8dcf45108~mv2.jpg/v1/fill/w_726,h_522,fp_0.60_0.26,q_85,usm_0.66_1.00_0.01,enc_auto/hero_image.jpg",
-    //   tags: [
-    //     "React",
-    //     "JavaScript",
-    //     "Frontend Development",
-    //     "Pension Management",
-    //   ],
+  const [filter, setFilter] = useState<Filter>("All");
+  // Re-observe cards whenever the filter changes (new cards mount)
+  const scope = useReveal<HTMLElement>([filter]);
+  useTilt(scope, ".tilt-card", 5);
 
-    //   liveUrl: "https://home.avcwise.co.uk/",
-    //   featured: true,
-    // },
-    // {
-    //   id: "vivup",
-    //   title: "VIVUP",
-    //   description:
-    //     "A UK-leading employee benefits platform providing health and well-being solutions.",
-    //   image:
-    //     "https://vivupbenefits.co.uk/hs-fs/hubfs/Solutions%20Roundel/All%20Solutions%20-%20White%20BG%20-%20August@0.5x-1.png?width=1031&height=1027&name=All%20Solutions%20-%20White%20BG%20-%20August@0.5x-1.png",
-    //   tags: [
-    //     "React",
-    //     "JavaScript",
-    //     "Frontend Development",
-    //     "Employee Benefits",
-    //   ],
-
-    //   liveUrl: "https://vivupbenefits.co.uk/",
-    //   featured: true,
-    // },
-    // {
-    //   id: "voicerules",
-    //   title: "VoiceRules - Global Phone System",
-    //   description:
-    //     "A global phone system allowing users to receive calls anywhere at a low cost.",
-    //   image:
-    //     "https://www.voicerules.com/assets/voicerules-cutomer-support-team-2c182da324b1d1d5169a2a649ca24a7866cc867cfa3b8ab8fa11178b8a0a282a.png",
-    //   tags: [
-    //     "React",
-    //     "JavaScript",
-    //     "Frontend Development",
-    //     "Telecommunications",
-    //   ],
-
-    //   liveUrl: "https://www.voicerules.com/",
-    //   featured: true,
-    // },
-    // {
-    //   id: "advisoryai",
-    //   title: "AdvisoryAI",
-    //   description:
-    //     "AI software designed for financial advisers to automate advisory documents, meeting notes, and client fact finds.",
-    //   image: "https://res.cloudinary.com/dqciqsoy0/image/upload/v1745559169/lupkux745v00tzfjn3ep.png",
-    //   tags: ["NextJs", "JavaScript", "Frontend Development", "Finance"],
-    //   liveUrl: "https://advisoryai.com/",
-    //   featured: false,
-    // },
-    {
-      id: "invoicean",
-      title: "Invoicean",
-      description:
-        "An advanced invoicing solution for freelancers, small businesses, and companies.",
-      image:
-        "https://invoicean.com/static/media/marketing-bg.129b9cfa9e5a40b6393a.png",
-      tags: ["React", "JavaScript", "Frontend Development", "Invoicing"],
-      githubUrl: "https://github.com/harshitparashar/invoicean",
-      liveUrl: "https://invoicean.com/",
-      featured: false,
-    },
-    {
-      id: "sanchitHealthcare",
-      title: "Sanchit HealthCare LLP",
-      description:
-        "Leading supplier of certified medical and surgical equipment across India.",
-      image: "https://res.cloudinary.com/dqciqsoy0/image/upload/v1745559185/uvkeczgw2uebrhqonpyj.png",
-      tags: ["Medical Equipment", "Healthcare Solutions"],
-      githubUrl:
-        "https://github.com/harshit-parashar-3/sanchit-healthcare-react",
-      liveUrl: "https://sanchithealthcarellp.com/",
-      featured: true,
-    },
-  ];
+  const visible = PROJECTS.filter(
+    (p) => filter === "All" || p.category === filter,
+  );
 
   return (
-    <section id="projects" className="py-24 relative">
-      <div className="container px-6 mx-auto">
-        <div className="text-center mb-16 reveal">
-          <h2 className="text-3xl md:text-4xl font-bold tracking-tight mb-4">
-            <span className="bg-clip-text text-transparent bg-gradient-to-r from-primary to-blue-400">
-              Featured Projects
+    <section id="projects" ref={scope} className="relative py-28 md:py-36">
+      <div className="container mx-auto px-6">
+        <div className="mb-12 flex flex-col gap-8 md:flex-row md:items-end md:justify-between">
+          <div className="relative max-w-xl">
+            <span className="ghost-title" aria-hidden="true">
+              WORK
             </span>
-          </h2>
-          <p className="text-muted-foreground text-lg max-w-2xl mx-auto">
-            Here’s a selection of projects I’ve worked on, showcasing my skills
-            in building modern web applications.
-          </p>
-        </div>
-
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-x-8 gap-y-12">
-          {projects.map((project, index) => (
-            <div
-              key={project.id}
-              className="reveal group"
-              style={{ animationDelay: `${index * 0.2}s` }}
+            <span className="section-kicker" data-reveal>
+              Selected Work
+            </span>
+            <h2
+              className="section-title mt-4"
+              data-reveal
+              data-reveal-delay="0.1"
             >
-              <div className="h-full bg-card rounded-xl overflow-hidden neo-morphism transition-all duration-300 hover:scale-[1.02] hover:shadow-xl">
-                <div className="relative h-52 overflow-hidden">
-                  <img
-                    src={project.image}
-                    alt={project.title}
-                    className="object-cover w-full h-full transition-transform duration-700 group-hover:scale-110"
-                  />
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent pointer-events-none"></div>
+              Projects I'm <span className="text-gradient">proud of</span>
+            </h2>
+          </div>
 
-                  {/* Tags */}
-                  <div className="absolute bottom-4 left-4 flex flex-wrap gap-2">
-                    {project.tags.slice(0, 3).map((tag) => (
-                      <span
-                        key={tag}
-                        className="py-1 px-2 text-xs font-medium bg-black/40 text-white rounded-full backdrop-blur-sm"
-                      >
-                        {tag}
-                      </span>
-                    ))}
-                    {project.tags.length > 3 && (
-                      <span className="py-1 px-2 text-xs font-medium bg-black/40 text-white rounded-full backdrop-blur-sm">
-                        +{project.tags.length - 3}
-                      </span>
-                    )}
-                  </div>
-                </div>
-
-                <div className="p-6">
-                  <h3 className="text-xl font-bold mb-2">{project.title}</h3>
-                  <p className="text-muted-foreground text-sm mb-6">
-                    {project.description}
-                  </p>
-
-                  <div className="flex items-center justify-between mt-auto">
-                    <Link
-                      to={`/project/${project.id}`}
-                      className="text-primary text-sm font-medium flex items-center hover:text-primary/80 transition-colors"
-                    >
-                      View Details
-                      <ArrowRight size={14} className="ml-1" />
-                    </Link>
-
-                    <div className="flex space-x-3">
-                      {project.githubUrl && (
-                        <a
-                          href={project.githubUrl}
-                          target="_blank"
-                          rel="noopener noreferrer"
-                          className="text-muted-foreground hover:text-foreground transition-colors"
-                          aria-label="View Github repository"
-                        >
-                          <Github size={18} />
-                        </a>
-                      )}
-                      {project.liveUrl && (
-                        <a
-                          href={project.liveUrl}
-                          target="_blank"
-                          rel="noopener noreferrer"
-                          className="text-muted-foreground hover:text-foreground transition-colors"
-                          aria-label="View live project"
-                        >
-                          <ExternalLink size={18} />
-                        </a>
-                      )}
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          ))}
+          {/* Filter */}
+          <div className="flex gap-2" data-reveal data-reveal-delay="0.2">
+            {FILTERS.map((f) => (
+              <button
+                key={f}
+                onClick={() => setFilter(f)}
+                className={`rounded-full border px-4 py-2 font-mono text-xs uppercase tracking-wider transition-all duration-300 ${
+                  filter === f
+                    ? "border-primary/50 bg-primary/15 text-foreground"
+                    : "border-white/10 bg-transparent text-muted-foreground hover:border-white/25 hover:text-foreground"
+                }`}
+              >
+                {f}
+              </button>
+            ))}
+          </div>
         </div>
 
-        <div className="text-center mt-14 reveal">
-          <Link
-            to="/projects"
-            className="inline-flex items-center justify-center px-6 py-3 border border-transparent text-base font-medium rounded-md text-white bg-primary hover:bg-primary/90 transition-colors"
-          >
-            View All Projects
-            <ArrowRight size={18} className="ml-2" />
-          </Link>
+        <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
+          {visible.map((project, i) => (
+            <ProjectCard key={project.slug} project={project} index={i} />
+          ))}
         </div>
       </div>
     </section>

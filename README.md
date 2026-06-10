@@ -1,70 +1,40 @@
-# Welcome to your Lovable project
+# Harshit Parashar — Portfolio
 
-## Project info
+Personal portfolio of Harshit Parashar, Frontend Engineer & freelance web developer.
 
-**URL**: https://lovable.dev/projects/a80b45f7-7c4a-4d71-ad00-3d61f665970c
+Dark, premium single-page design with smooth scroll-reveal animations, section tracking (scrollspy + reading progress bar), animated stat counters, a skills marquee and a freelance-focused services section.
 
-## How can I edit this code?
+## Tech Stack
 
-There are several ways of editing your application.
+- **React 18 + TypeScript** (Vite)
+- **Tailwind CSS** with a custom dark design system
+- **Native animations** — IntersectionObserver scroll reveals + CSS keyframes (no animation library needed)
+- shadcn/ui component primitives
 
-**Use Lovable**
-
-Simply visit the [Lovable Project](https://lovable.dev/projects/a80b45f7-7c4a-4d71-ad00-3d61f665970c) and start prompting.
-
-Changes made via Lovable will be committed automatically to this repo.
-
-**Use your preferred IDE**
-
-If you want to work locally using your own IDE, you can clone this repo and push changes. Pushed changes will also be reflected in Lovable.
-
-The only requirement is having Node.js & npm installed - [install with nvm](https://github.com/nvm-sh/nvm#installing-and-updating)
-
-Follow these steps:
+## Getting Started
 
 ```sh
-# Step 1: Clone the repository using the project's Git URL.
-git clone <YOUR_GIT_URL>
-
-# Step 2: Navigate to the project directory.
-cd <YOUR_PROJECT_NAME>
-
-# Step 3: Install the necessary dependencies.
-npm i
-
-# Step 4: Start the development server with auto-reloading and an instant preview.
-npm run dev
+npm install
+npm run dev      # start dev server
+npm run build    # production build
+npm run preview  # preview the production build
 ```
 
-**Edit a file directly in GitHub**
+## Structure
 
-- Navigate to the desired file(s).
-- Click the "Edit" button (pencil icon) at the top right of the file view.
-- Make your changes and commit the changes.
+```
+src/
+├── components/      # Hero, About, Services, Projects, Experience, Skills, Contact, Navbar, Footer, Logo
+├── lib/animations.ts  # useReveal, useCountUp, useMagnetic hooks
+├── pages/           # Index (single page), NotFound
+└── index.css        # design tokens + animation utilities
+public/
+├── favicon.svg      # HP monogram logo
+└── utils/Resume.pdf # downloadable resume
+```
 
-**Use GitHub Codespaces**
+## Animation System
 
-- Navigate to the main page of your repository.
-- Click on the "Code" button (green button) near the top right.
-- Select the "Codespaces" tab.
-- Click on "New codespace" to launch a new Codespace environment.
-- Edit files directly within the Codespace and commit and push your changes once you're done.
-
-## What technologies are used for this project?
-
-This project is built with .
-
-- Vite
-- TypeScript
-- React
-- shadcn-ui
-- Tailwind CSS
-
-## How can I deploy this project?
-
-Simply open [Lovable](https://lovable.dev/projects/a80b45f7-7c4a-4d71-ad00-3d61f665970c) and click on Share -> Publish.
-
-## I want to use a custom domain - is that possible?
-
-We don't support custom domains (yet). If you want to deploy your project under your own domain then we recommend using Netlify. Visit our docs for more details: [Custom domains](https://docs.lovable.dev/tips-tricks/custom-domain/)
-# harshit-portfolio
+- `data-reveal` attributes (`up | left | right | zoom`) + `useReveal()` hook for scroll-triggered reveals, with optional `data-reveal-delay` stagger.
+- All animations respect `prefers-reduced-motion`.
+- Content is never hidden if JavaScript fails (reveal styles are gated behind a `.js` class on `<html>`).

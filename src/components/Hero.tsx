@@ -1,95 +1,179 @@
 import React, { useEffect, useRef } from "react";
-import { ChevronDown } from "lucide-react";
+import { ArrowDown, ArrowUpRight, Github, Linkedin } from "lucide-react";
+import {
+  useMagnetic,
+  useTypewriter,
+  prefersReducedMotion,
+} from "@/lib/animations";
+
+const ROLES = [
+  "Frontend Engineer",
+  "Freelance Developer",
+  "React & Next.js Expert",
+  "UI Craftsman",
+];
 
 const Hero: React.FC = () => {
-  const textRef = useRef<HTMLDivElement>(null);
+  const orbARef = useRef<HTMLDivElement>(null);
+  const orbBRef = useRef<HTMLDivElement>(null);
+  const magneticCta = useMagnetic<HTMLAnchorElement>(0.2);
+  const role = useTypewriter(ROLES);
 
+  // Gentle mouse parallax on the background orbs
   useEffect(() => {
-    const handleMouseMove = (event: MouseEvent) => {
-      if (!textRef.current) return;
+    if (prefersReducedMotion()) return;
+    let raf = 0;
 
-      const { clientX, clientY } = event;
-      const { innerWidth, innerHeight } = window;
-
-      // Calculate percentage position
-      const xPos = (clientX / innerWidth - 0.5) * 2; // -1 to 1
-      const yPos = (clientY / innerHeight - 0.5) * 2; // -1 to 1
-
-      // Apply subtle 3D tilt effect
-      const transformValue = `rotateX(${yPos * -3}deg) rotateY(${xPos * 3}deg)`;
-      textRef.current.style.transform = transformValue;
+    const onMove = (e: MouseEvent) => {
+      cancelAnimationFrame(raf);
+      raf = requestAnimationFrame(() => {
+        const nx = (e.clientX / window.innerWidth - 0.5) * 2;
+        const ny = (e.clientY / window.innerHeight - 0.5) * 2;
+        if (orbARef.current) {
+          orbARef.current.style.transform = `translate(${nx * 28}px, ${ny * 28}px)`;
+        }
+        if (orbBRef.current) {
+          orbBRef.current.style.transform = `translate(${nx * -36}px, ${ny * -36}px)`;
+        }
+      });
     };
 
-    window.addEventListener("mousemove", handleMouseMove);
-
+    window.addEventListener("mousemove", onMove);
     return () => {
-      window.removeEventListener("mousemove", handleMouseMove);
+      window.removeEventListener("mousemove", onMove);
+      cancelAnimationFrame(raf);
     };
   }, []);
 
   return (
-    <section className="min-h-screen flex flex-col justify-center items-center pt-20 relative overflow-hidden">
-      {/* Background circles */}
-      <div className="absolute -top-[30%] -left-[20%] w-[70%] h-[70%] rounded-full bg-primary/5 dark:bg-primary/10 blur-3xl"></div>
-      <div className="absolute -bottom-[30%] -right-[20%] w-[70%] h-[70%] rounded-full bg-primary/5 dark:bg-primary/10 blur-3xl"></div>
+    <section
+      id="home"
+      className="relative flex min-h-screen flex-col items-center justify-center overflow-hidden"
+    >
+      {/* Animated aurora backdrop */}
+      <div className="aurora" aria-hidden="true" />
 
-      <div className="container px-6 mx-auto text-center relative z-10">
+      {/* Ambient gradient orbs (outer = mouse parallax, inner = idle float) */}
+      <div
+        ref={orbARef}
+        className="pointer-events-none absolute -top-[15%] -left-[10%] transition-transform duration-700 ease-out"
+      >
+        <div className="orb-float-a h-[55vmax] w-[55vmax] rounded-full bg-indigo-600/20 blur-[120px]" />
+      </div>
+      <div
+        ref={orbBRef}
+        className="pointer-events-none absolute -bottom-[20%] -right-[10%] transition-transform duration-700 ease-out"
+      >
+        <div className="orb-float-b h-[50vmax] w-[50vmax] rounded-full bg-fuchsia-600/15 blur-[120px]" />
+      </div>
+
+      {/* Faint grid */}
+      <div
+        className="pointer-events-none absolute inset-0 opacity-[0.04]"
+        style={{
+          backgroundImage:
+            "linear-gradient(to right, white 1px, transparent 1px), linear-gradient(to bottom, white 1px, transparent 1px)",
+          backgroundSize: "72px 72px",
+          maskImage:
+            "radial-gradient(ellipse 70% 60% at 50% 40%, black, transparent)",
+          WebkitMaskImage:
+            "radial-gradient(ellipse 70% 60% at 50% 40%, black, transparent)",
+        }}
+      />
+
+      <div className="container relative z-10 mx-auto px-6 text-center">
         <div
-          className="mb-4 inline-block"
-          data-aos="fade-up"
-          data-aos-delay="100"
+          className="anim-fade-up mb-8 inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/[0.04] px-4 py-2 backdrop-blur-sm"
+          style={{ animationDelay: "0.15s" }}
         >
-          <span className="py-1 px-3 text-xs font-medium bg-primary/10 text-primary rounded-full tracking-wide">
-            🚀 Frontend Developer | React Specialist
+          <span className="relative flex h-2 w-2">
+            <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-emerald-400 opacity-75" />
+            <span className="relative inline-flex h-2 w-2 rounded-full bg-emerald-400" />
+          </span>
+          <span className="font-mono text-xs tracking-widest text-muted-foreground">
+            AVAILABLE FOR FREELANCE PROJECTS
           </span>
         </div>
 
-        <div
-          ref={textRef}
-          className="transition-transform duration-200 ease-out mx-auto max-w-4xl mb-8 lg:mb-12"
-          style={{ transformStyle: "preserve-3d", perspective: "1000px" }}
-        >
-          <h1 className="text-4xl md:text-6xl lg:text-7xl font-extrabold tracking-tight mb-6">
-            <div className="mb-2 inline-block text-reveal-container">
-              <span className="inline-block">Hello, I'm Harshit Parashar</span>
-            </div>
-            <div
-              className="mt-2 text-reveal-container"
-              style={{ animationDelay: "0.2s" }}
-            >
-              <span className="bg-clip-text text-transparent bg-gradient-to-r from-primary to-blue-400 inline-block">
-                Frontend Developer
+        <h1 className="mx-auto mb-8 max-w-5xl font-display text-5xl font-bold leading-[1.05] tracking-tight sm:text-6xl md:text-7xl lg:text-8xl">
+          <span className="line-mask">
+            <span style={{ animationDelay: "0.35s" }}>Harshit Parashar</span>
+          </span>
+          <span className="line-mask">
+            <span style={{ animationDelay: "0.5s" }}>
+              <span className="text-gradient text-gradient-animate">
+                {role || "\u00A0"}
               </span>
-            </div>
-          </h1>
+              <span className="type-caret" aria-hidden="true" />
+            </span>
+          </span>
+        </h1>
 
-          <p
-            className="text-lg md:text-xl text-muted-foreground max-w-2xl mx-auto text-balance animate-fade-in"
-            style={{ animationDelay: "0.8s" }}
-          >
-            Crafting elegant user experiences with modern web technologies. I
-            build responsive, accessible, and performant web applications.
-          </p>
+        <p
+          className="anim-fade-up mx-auto mb-10 max-w-2xl text-balance text-base text-muted-foreground md:text-xl"
+          style={{ animationDelay: "0.75s" }}
+        >
+          I help startups and businesses ship polished, high-performance web
+          products with <span className="text-foreground">React</span>,{" "}
+          <span className="text-foreground">Next.js</span> &{" "}
+          <span className="text-foreground">TypeScript</span> — 4+ years of
+          experience across AI, fintech, telecom and HR platforms.
+        </p>
+
+        <div
+          className="anim-fade-up flex flex-wrap items-center justify-center gap-4"
+          style={{ animationDelay: "0.95s" }}
+        >
+          <a ref={magneticCta} href="#contact" className="btn-primary">
+            Start a Project
+            <ArrowUpRight size={16} />
+          </a>
+          <a href="#projects" className="btn-ghost">
+            View My Work
+            <ArrowDown size={16} />
+          </a>
         </div>
 
         <div
-          className="mt-8 md:mt-12 animate-fade-in"
-          style={{ animationDelay: "1.2s" }}
+          className="anim-fade-up mt-12 flex items-center justify-center gap-5"
+          style={{ animationDelay: "1.15s" }}
         >
           <a
-            href="#about"
-            className="inline-flex items-center justify-center px-6 py-3 border border-transparent text-base font-medium rounded-md text-white bg-primary hover:bg-primary/90 md:text-lg neo-morphism transition-all duration-300 hover:scale-105"
+            href="https://github.com/harshit-parashar-3"
+            target="_blank"
+            rel="noopener noreferrer"
+            aria-label="GitHub"
+            className="text-muted-foreground transition-all duration-300 hover:-translate-y-1 hover:text-foreground"
           >
-            Explore My Work
+            <Github size={20} />
+          </a>
+          <a
+            href="https://linkedin.com/in/harshit-parashar"
+            target="_blank"
+            rel="noopener noreferrer"
+            aria-label="LinkedIn"
+            className="text-muted-foreground transition-all duration-300 hover:-translate-y-1 hover:text-foreground"
+          >
+            <Linkedin size={20} />
+          </a>
+          <span className="h-4 w-px bg-border" />
+          <a
+            href="mailto:parasharharshit99@gmail.com"
+            className="font-mono text-sm text-muted-foreground transition-colors hover:text-primary"
+          >
+            parasharharshit99@gmail.com
           </a>
         </div>
       </div>
 
-      <div className="absolute bottom-10 left-1/2 transform -translate-x-1/2 animate-bounce-subtle">
-        <a href="#about" aria-label="Scroll to about section">
-          <ChevronDown className="text-primary" size={32} />
-        </a>
-      </div>
+      <a
+        href="#about"
+        aria-label="Scroll to about section"
+        className="anim-fade-up absolute bottom-8 left-1/2 -translate-x-1/2"
+        style={{ animationDelay: "1.5s" }}
+      >
+        <div className="scroll-mouse" />
+      </a>
     </section>
   );
 };
